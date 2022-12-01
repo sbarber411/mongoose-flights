@@ -3,8 +3,19 @@ const Flight = require('../models/flight')
 module.exports = {
 	new: newFlight,
 	create, 
-	index
+	index,
+	show
 }
+
+function show(req, res) {
+
+	Flight.findById(req.params.id, function(err, flightDoc) {
+		console.log(flightDoc)
+		
+	  res.render('flights/show', { title: 'Flight Detail', flight: flightDoc});
+	});
+  }
+
 
 function index(req, res){
 
@@ -12,7 +23,7 @@ function index(req, res){
 		
 		console.log(flightDocs)
 
-		res.render('flights/index', {flights: flightDocs, name: 'Sophia Airlines'})
+		res.render('flights/index', {flights: flightDocs, name: ''})
 	})
 
 }
@@ -25,18 +36,22 @@ function create(req,res){
 		if(err){
 			console.log(err);
 			return res.send('err creating check the terminal')
-		}
-	
+		} else {
+
 		console.log(flightDoc);
 		
 
 		// respond to the client
 		res.redirect('/')
+		}
+	
 	}); // end of the callback function in Movie.create
 
     
 }
 
+
 function newFlight(req, res){
-	res.render('flights/new')
-}
+	const newFlight = new Flight();
+	res.render('flights/new', {defaultDeparture: newFlight.departs});
+};
