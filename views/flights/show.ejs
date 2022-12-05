@@ -21,8 +21,16 @@
             <div><%= flight.airport %></div>
         </section>
 
+<div>Tickets:</div>
+    <ul>
+        <% ticket.forEach(t => { %>
+         <li class="text-center p-0">Seat: <%= t.seat %> Price: $<%= t.price%></li>
+        <% }) %>
+      </ul>
 
-        <br><br><h2>Destinations</h2>
+    <a href="/flights/<%= flight.id %>/tickets/new" class="btn btn-outline-primary">Purchase Ticket</a>
+       
+    <br><br><h2>Destinations</h2>
         <form id="add-destinations" method="POST"
         action="/flights/<%= flight._id %>/destinations">
         <label>Airport:</label>
@@ -31,7 +39,7 @@
             <option value="DFW">Dallas</option>
             <option value="DEN">Denver</option>
             <option value="LAX">Los Angeles</option>
-            <option value="SAN">San Diego</option>
+            <option value="SAN" selected>San Diego</option>
         </select>
        
         <label>Arrival:</label>
@@ -43,9 +51,9 @@
             <table>
               <thead>
               <tr>
+                <th>Date</th>
                 <th>Airport</th>
                 <th>Arrival</th>
-                
               </tr>
               </thead>
               <tbody>
@@ -53,7 +61,6 @@
                 <tr>
                 <td><%= r.airport %></td>
                 <td><%= r.arrival %></td>
-                
                 </tr>
               <% }); %>
               </tbody>

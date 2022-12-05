@@ -100,7 +100,7 @@ table td {
 }
 
 #list a:hover {
-  background-color: white;
+  background-color: rgb(92, 120, 230)
 }
 
 #show-page {
